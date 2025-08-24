@@ -19,39 +19,35 @@ st.set_page_config(
 )
 
 # --- Main App Logic ---
-
 def page_setup():
     """
     Page for initial user setup: monthly income and typical expenses.
     """
-    st.header("How Much YOU MAKE?")
-    st.write("Let's see how bad your Financial situation is. Don't worry, we can fix it!")
+    st.header("Step 1: Your Financial Snapshot")
+    st.write("Let's start with the basics. This will help the AI understand your financial situation.")
 
     # Use session state to manage dynamic expense inputs
     if 'monthly_expenses' not in st.session_state:
         st.session_state.monthly_expenses = [{"name": "", "amount": 0.0}]
 
+    # Capture income and store it in session state
+    income = st.number_input("What is your total monthly income?", min_value=0.0, step=100.0, value=st.session_state.get('income', 0.0))
+    st.session_state.income = income
 
+    st.write("List your typical, recurring monthly expenses (e.g., Rent, Utilities, Insurance).")
 
-    with st.form("setup_form"):
-        # Capture income and store it in session state
-        income = st.number_input("What is your total monthly income?", min_value=0.0, step=100.0, value=st.session_state.get('income', 0.0))
-        st.session_state.income = income
+    for i, expense in enumerate(st.session_state.monthly_expenses):
+        cols = st.columns([3, 2])
+        expense['name'] = cols[0].text_input(f"Expense Name {i+1}", value=expense['name'], key=f"name_{i}")
+        expense['amount'] = cols[1].number_input(f"Amount {i+1}", value=expense['amount'], min_value=0.0, step=10.0, key=f"amount_{i}")
 
+    st.markdown("---") # Visual separator
 
-        st.write("List Monthly Expenses (e.g., Rent, Utilities, Insurance).")
+    # --- Action Buttons ---
+    col1, col2, _ = st.columns([1, 1, 3]) # Use columns to place buttons side-by-side
 
-        for i, expense in enumerate(st.session_state.monthly_expenses):
-            cols = st.columns([3, 2])
-            expense['name'] = cols[0].text_input(f"Expense Name {i+1}", value=expense['name'], key=f"name_{i}")
-            expense['amount'] = cols[1].number_input(f"Amount {i+1}", value=expense['amount'], min_value=0.0, step=10.0, key=f"amount_{i}")
-            # --- Button to add more expenses (Moved outside the form) ---
-        if st.button("Add Another Expense"):
-            st.session_state.monthly_expenses.append({"name": "", "amount": 0.0})
-            st.rerun()
-            
-        submitted = st.form_submit_button("Save Initial Setup")
-        if submitted:
+    with col1:
+        if st.button("Save Initial Setup"):
             # Filter out empty expenses
             valid_expenses = [exp for exp in st.session_state.monthly_expenses if exp['name'] and exp['amount'] > 0]
             if not valid_expenses:
@@ -61,9 +57,12 @@ def page_setup():
                 if error:
                     st.error(f"Failed to save expenses: {error}")
                 else:
-                    st.success("We have an idea now")
-                    st.info("Navigate to the 'Dashboard' page to track spending and get insights.")
-
+                    st.success("Your financial snapshot has been saved!")
+                    st.info("Navigate to the 'Dashboard & AI Assistant' page to track spending and get insights.")
+    with col2:
+        if st.button("Add Another Expense"):
+            st.session_state.monthly_expenses.append({"name": "", "amount": 0.0})
+            st.rerun()
 
 def page_dashboard():
     """
@@ -202,4 +201,5 @@ if __name__ == "__main__":
     # Before running the app, ensure the database tables are ready
     db.setup_database()
     main()
+
 
