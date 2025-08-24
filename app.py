@@ -28,10 +28,10 @@ def page_setup():
 
     # Use session state to manage dynamic expense inputs
     if 'monthly_expenses' not in st.session_state:
-        st.session_state.monthly_expenses = [{"name": "", "amount": 0.0}]
+        st.session_state.monthly_expenses = [{"name": "", "amount"}]
 
     # Capture income and store it in session state
-    income = st.number_input("What is your total monthly income?", step=100.0, value=st.session_state.get('income', 0.0))
+    income = st.number_input("What is your total monthly income?", step=100.0, value=st.session_state.get('income'))
     st.session_state.income = income
 
     st.write("List your typical, recurring monthly expenses (e.g., Rent, Utilities, Insurance).")
@@ -61,7 +61,7 @@ def page_setup():
                     st.info("Navigate to the 'Dashboard & AI Assistant' page to track spending and get insights.")
     with col2:
         if st.button("Add Another Expense"):
-            st.session_state.monthly_expenses.append({"name": "", "amount": 0.0})
+            st.session_state.monthly_expenses.append({"name": "", "amount"})
             st.rerun()
 
 def page_dashboard():
@@ -74,7 +74,7 @@ def page_dashboard():
     # Fetch data first
     df_current = db.get_current_expenses_df()
     df_monthly = db.get_monthly_expenses_df()
-    income = st.session_state.get('income', 0)
+    income = st.session_state.get('income')
 
     # --- Spending Rate Cards ---
     st.subheader("📈 Daily Spending Overview")
@@ -201,6 +201,7 @@ if __name__ == "__main__":
     # Before running the app, ensure the database tables are ready
     db.setup_database()
     main()
+
 
 
 
