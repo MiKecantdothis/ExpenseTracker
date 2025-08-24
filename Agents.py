@@ -5,9 +5,12 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 import pandas as pd
+from dotenv import load_env  
+load_env()
+google_api = os.getenv('GEMINI_API')
 
 
-llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key="")
+llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=google_api)
 
 
 class ExpenseAnalysisAgent:
@@ -120,4 +123,5 @@ class SavingsSuggestionAgent:
 
 # Instantiate the agents for use in the main app
 analysis_agent = ExpenseAnalysisAgent()
+
 savings_agent = SavingsSuggestionAgent()
