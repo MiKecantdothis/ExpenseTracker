@@ -8,8 +8,8 @@ load_dotenv()
 
 # --- Supabase Connection ---
 # It's recommended to use environment variables for your Supabase URL and Key
-SUPABASE_URL=""
-SUPABASE_KEY=""
+SUPABASE_URL=os.getenv('SUPABASE_URL')
+SUPABASE_KEY=os.getenv('SUPABASE_API')
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
@@ -124,4 +124,5 @@ if __name__ == '__main__':
     # This block can be used for initial setup and testing
     print("Running database setup...")
     setup_database()
+
    
