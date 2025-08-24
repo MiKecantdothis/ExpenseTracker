@@ -28,7 +28,7 @@ def page_setup():
 
     # Use session state to manage dynamic expense inputs
     if 'monthly_expenses' not in st.session_state:
-        st.session_state.monthly_expenses = [{"name": "", "amount"}]
+        st.session_state.monthly_expenses = [{"name": "", "amount":}]
 
     # Capture income and store it in session state
     income = st.number_input("What is your total monthly income?", step=100.0, value=st.session_state.get('income'))
@@ -61,7 +61,7 @@ def page_setup():
                     st.info("Navigate to the 'Dashboard & AI Assistant' page to track spending and get insights.")
     with col2:
         if st.button("Add Another Expense"):
-            st.session_state.monthly_expenses.append({"name": "", "amount"})
+            st.session_state.monthly_expenses.append({"name": "", "amount":})
             st.rerun()
 
 def page_dashboard():
@@ -201,6 +201,7 @@ if __name__ == "__main__":
     # Before running the app, ensure the database tables are ready
     db.setup_database()
     main()
+
 
 
 
