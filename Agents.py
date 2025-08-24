@@ -6,7 +6,7 @@ from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 import pandas as pd
 from dotenv import load_env  
-load_env()
+load_dotenv()
 google_api = os.getenv('GEMINI_API')
 
 
@@ -125,3 +125,4 @@ class SavingsSuggestionAgent:
 analysis_agent = ExpenseAnalysisAgent()
 
 savings_agent = SavingsSuggestionAgent()
+
