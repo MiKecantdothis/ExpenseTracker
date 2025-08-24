@@ -1,0 +1,7 @@
+streamlit 
+supabase 
+pandas 
+plotly-express 
+langchain-google-genai 
+streamlit-option-menu
+langchain
