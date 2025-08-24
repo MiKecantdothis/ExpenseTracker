@@ -24,17 +24,14 @@ def page_setup():
     """
     Page for initial user setup: monthly income and typical expenses.
     """
-    st.header("How Much MAKE YOU?")
+    st.header("How Much YOU MAKE?")
     st.write("Let's see how bad your Financial situation is. Don't worry, we can fix it!")
 
     # Use session state to manage dynamic expense inputs
     if 'monthly_expenses' not in st.session_state:
         st.session_state.monthly_expenses = [{"name": "", "amount": 0.0}]
 
-    # --- Button to add more expenses (Moved outside the form) ---
-    if st.button("Add Another Expense"):
-        st.session_state.monthly_expenses.append({"name": "", "amount": 0.0})
-        st.rerun()
+
 
     with st.form("setup_form"):
         # Capture income and store it in session state
@@ -48,7 +45,11 @@ def page_setup():
             cols = st.columns([3, 2])
             expense['name'] = cols[0].text_input(f"Expense Name {i+1}", value=expense['name'], key=f"name_{i}")
             expense['amount'] = cols[1].number_input(f"Amount {i+1}", value=expense['amount'], min_value=0.0, step=10.0, key=f"amount_{i}")
-
+            # --- Button to add more expenses (Moved outside the form) ---
+        if st.button("Add Another Expense"):
+            st.session_state.monthly_expenses.append({"name": "", "amount": 0.0})
+            st.rerun()
+            
         submitted = st.form_submit_button("Save Initial Setup")
         if submitted:
             # Filter out empty expenses
@@ -81,7 +82,7 @@ def page_dashboard():
     if income == 0:
         st.warning("Please set your monthly income in the 'Initial Setup' page to see your spending overview.")
     else:
-        recommended_rate = (income * 0.7) / 30
+        recommended_rate = (income - df_monthly['amount'].sum()) / 30
         current_sum = df_current['amount'].sum() if not df_current.empty else 0
         current_rate = current_sum / 30
 
@@ -201,3 +202,4 @@ if __name__ == "__main__":
     # Before running the app, ensure the database tables are ready
     db.setup_database()
     main()
+
