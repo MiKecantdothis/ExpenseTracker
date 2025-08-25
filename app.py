@@ -31,6 +31,7 @@ def page_setup():
         st.session_state.monthly_expenses = [{"name": "", "amount":0.0}]
 
     # Capture income and store it in session state
+    income = 10000
     income = st.number_input("What is your total monthly income?", step=100.0, value=st.session_state.get('income'))
     st.session_state.income = income
 
@@ -201,6 +202,7 @@ if __name__ == "__main__":
     # Before running the app, ensure the database tables are ready
     db.setup_database()
     main()
+
 
 
 
