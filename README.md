@@ -2,8 +2,7 @@
 
 A simple and interactive expense tracking web app built with Python, Streamlit, and Matplotlib. Visualize your spending, manage transactions, and gain insights into your financial habits.
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)]([https://share.streamlit.io/](https://expensetracker-igg4wm7qhxwz6jqzgncse5.streamlit.app/))
-
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://expensetracker-igg4wm7qhxwz6jqzgncse5.streamlit.app/)
 ---
 
 ## 🚀 Features
