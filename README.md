@@ -21,7 +21,7 @@ A simple and interactive expense tracking web app built with Python, Streamlit, 
 ---
 
 <details>
-<summary>🖼️ <b>UI Gallery (Click to expand)</b></summary>
+<summary>🖼️ <b>UI Gallery</b></summary>
 
 ### Dashboard View
 ![Dashboard](./dashboard.png)
@@ -40,20 +40,6 @@ How to append more images:
 Optional: Add a section header or short description above your image.
 -->
 </details>
-
----
-
-## 📸 How to Add Your Own Screenshots
-
-1. **Take a screenshot** of any UI or chart you want to showcase.
-2. **Upload** the image to the `images/` folder in this repo:
-    - On GitHub: Click `Add file` > `Upload files`
-    - Or drag & drop into the file tree on GitHub
-3. **Edit this README.md** and in the UI Gallery section, append your image:
-    ```markdown
-    ![Brief Description](images/your_image.png)
-    ```
-4. **Commit** your changes!
 
 ---
 
