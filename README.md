@@ -25,9 +25,11 @@ A simple and interactive expense tracking web app built with Python, Streamlit, 
 
 ### Dashboard View
 ![Dashboard](./dashboard.png)
+![Dashboard](./output1.png)
+![Dashboard](./output2.png)
+![Dashboard](./graph1.png)
 
-### Add Expense Modal
-![Add Expense](images/add_expense.png)
+
 
 <!-- 
 How to append more images:
